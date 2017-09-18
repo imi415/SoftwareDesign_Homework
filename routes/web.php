@@ -13,3 +13,8 @@
 
 Route::get('/', 'StaticController@index');
 Route::get('/about', 'StaticController@about');
+
+Route::get('/item', 'ItemController@index');
+Route::get('/item/new', 'ItemController@new'); // It MUST above the '/item/{id}'
+Route::post('/item/new', 'ItemController@create');
+Route::get('/item/{id}', 'ItemController@show');
