@@ -17,6 +17,8 @@ A e-Commerce system.
       - is_available(bool)
       - available_amount(integer)
       - seller(integer, uid)
+      - price(integer)
+      - sold_amount(integer)
 * [ ]User management
   - [ ]User CURD
   - [ ]Login/Signup

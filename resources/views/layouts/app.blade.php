@@ -11,7 +11,9 @@
 </head>
 <body>
   <div class="container">
-    @yield('body')
+    <div class="row">
+      @yield('body')
+    </div>
   </div>
 </body>
 <script src="/js/jquery-3.2.1.min.js"></script>
