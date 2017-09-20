@@ -22,3 +22,7 @@ Route::put('/item/{id}/edit', 'ItemController@update');
 Route::get('/item/{id}/delete', 'ItemController@delete');
 Route::delete('/item/{id}/delete', 'ItemController@destroy');
 Route::get('/item/{id}', 'ItemController@show');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -8,5 +8,9 @@
       Index of Show
     @endslot
   @endcomponent
-{{ $items }}
+@foreach ($items as $item)
+  @component('item.layouts.card', ['item' => $item])
+
+  @endcomponent
+@endforeach
 @endsection

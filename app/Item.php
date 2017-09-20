@@ -12,13 +12,13 @@ class Item extends Model
 
   protected $fillable = [
     'name',
-    'iamge_url',
+    'image_url',
     'description',
     'is_available',
     'available_amount',
     'price',
     'sold_amount'
   ];
-  
+
   protected $dates = ['deleted_at'];
 }

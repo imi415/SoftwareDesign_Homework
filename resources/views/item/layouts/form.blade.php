@@ -1,6 +1,18 @@
-<form class="form-horizontal" action="{{ $form_url }}" method="{{ $form_method }}">
+<form class="form-horizontal" enctype="multipart/form-data" action="{{ $form_url }}" method="{{ $form_method }}">
   <fieldset>
     <legend>Legend</legend>
+    <div class="form-group">
+      <div class="row col-lg-10 col-lg-offset-1">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img id="blah" src="@isset($item -> image_url) /{{ $item -> image_url }}@endisset" alt="No Image" />
+            <div class="caption">
+              <input class="btn" type='file' name="image" id="imgInp"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="form-group">
       <label for="inputName" class="col-lg-2 control-label">Name</label>
       <div class="col-lg-10">
@@ -41,4 +53,18 @@
       </div>
     </div>
   </fieldset>
+  <script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#imgInp").change(function(){
+    readURL(this);
+  });
+  </script>
 </form>
