@@ -3,14 +3,13 @@
 @section('title', 'Test title.')
 
 @section('body')
-  @component('layouts.navbar')
+  @component('layouts.navbar', ['user' => $user])
     @slot('brand')
-      Wow! Such Brand
+      e-Commerce System
     @endslot
   @endcomponent
   <div class="jumbotron">
-    <h1><i class="fa fa-warning"></i> Under construction</h1>
-    <p><i class="fa fa-info-circle"></i> </p>
-    <p><a class="btn btn-primary btn-lg">Learn more</a></p>
+    <h1><i class="fa fa-warning"></i> An e-Commerce System</h1>
+    <p><i class="fa fa-info-circle"></i> Not completed due to lack of time.</p>
   </div>
 @endsection

@@ -59,7 +59,7 @@ class ItemController extends Controller
     $user = Auth::user();
 
     $item = Item::where('id', intval($id)) -> first();
-    return view('item.show', ['item' => $item]);
+    return view('item.show', ['item' => $item, 'user' => $user]);
   }
 
   // Update Item page

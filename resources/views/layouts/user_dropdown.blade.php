@@ -7,8 +7,6 @@
       <li><a href="{{ action('UserController@item') }}">My Items</a></li>
     @endif
     <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-    <li class="divider"></li>
     <li><a href="{{ action('UserController@logout') }}">Logout</a></li>
   </ul>
 </li>

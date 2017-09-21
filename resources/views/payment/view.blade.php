@@ -8,8 +8,6 @@
       Index of Order
     @endslot
   @endcomponent
-  {{ $order }}
-
   <div class="panel panel-info">
   <div class="panel-heading">
     <h3 class="panel-title">Payment</h3>
