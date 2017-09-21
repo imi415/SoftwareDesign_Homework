@@ -33,6 +33,7 @@ Route::get('/logout', 'UserController@logout');
 Auth::routes();
 
 Route::get('/home', 'UserController@home')->name('home');
+Route::get('/home/item', 'UserController@item');
 
 Route::get('/order', 'OrderController@index');
 Route::get('/order/{id}', 'OrderController@show');

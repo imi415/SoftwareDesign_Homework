@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Order;
 use App\OrderItem;
+use App\Item;
 
 class PaymentController extends Controller
 {
@@ -19,7 +20,12 @@ class PaymentController extends Controller
     $user = Auth::user();
 
     $order = Order::where('id', $id) -> first();
-    return view('payment.view', ['order' => $order]);
+    $items = OrderItem::where('order_id', $id) -> get();
+    $price = 0;
+    foreach($items as $item) {
+      $price += $item -> real_price;
+    }
+    return view('payment.view', ['user' => $user, 'order' => $order, 'price' => $price]);
   }
 
   public function pay($id) {
@@ -29,9 +35,10 @@ class PaymentController extends Controller
     if ($order -> status == 'payment_required') {
       $order -> status = 'processing';
       $order -> save();
-      $items = OrderItem::where('order_id', $order -> id) -> get();
-      foreach($items as $item) {
-        $item -> available_amount = $item -> amount - 1;
+      $order_items = OrderItem::where('order_id', $order -> id) -> get();
+      foreach($order_items as $order_item) {
+        $item = Item::where('id', $order_item -> item_id) -> first();
+        $item -> available_amount = $item -> available_amount - 1;
         $item -> save();
       }
     }

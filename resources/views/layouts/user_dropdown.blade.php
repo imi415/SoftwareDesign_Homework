@@ -3,7 +3,9 @@
   <ul class="dropdown-menu" role="menu">
     <li><a href="{{ action('UserController@home') }}">Home</a></li>
     <li><a href="{{ action('OrderController@index') }}">My Orders</a></li>
-    <li><a href="#">Something else here</a></li>
+    @if ($user -> is_seller || $user -> is_admin)
+      <li><a href="{{ action('UserController@item') }}">My Items</a></li>
+    @endif
     <li class="divider"></li>
     <li><a href="#">Separated link</a></li>
     <li class="divider"></li>

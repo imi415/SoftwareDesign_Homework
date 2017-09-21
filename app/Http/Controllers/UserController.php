@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use \App\Item;
+
 class UserController extends Controller
 {
 
@@ -17,6 +19,11 @@ class UserController extends Controller
     return view('user.home', ['user' => $user]);
   }
 
+  public function item() {
+    $user = Auth::user();
+    $items = Item::where('seller', $user -> id) -> get();
+    return view('user.item', ['user' => $user, 'items' => $items]);
+  }
 
   public function logout() {
     $user = Auth::user();

@@ -19,13 +19,8 @@ class OrderController extends Controller
   public function index() {
     $user = Auth::user();
     $buyer_orders = Order::where('buyer_id', $user -> id) -> get();
-    $buyer_order_items = [];
-    foreach ($buyer_orders as $buyer_order) {
-      $order_items = OrderItem::where('order_id', $buyer_order -> id) -> get();
-      $buyer_order_items.push($order_items);
-    }
     $seller_orders =array();
-    if ($user -> is_seller) {
+    if ($user -> is_seller || $user -> is_admin) {
       $seller_orders = Order::where('seller_id', $user -> id) -> get();
     }
     return view('order.index', ['user' => $user,
@@ -58,7 +53,7 @@ class OrderController extends Controller
     $order_item -> real_price = $item -> price;
 
     $order_item -> save();
-    return redirect() -> action('PaymentController@show', ['id' => $id]);
+    return redirect() -> action('PaymentController@show', ['id' => $order -> id]);
   }
 
   public function show($id) {

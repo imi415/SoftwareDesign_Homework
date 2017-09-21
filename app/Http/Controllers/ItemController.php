@@ -23,9 +23,8 @@ class ItemController extends Controller
   public function new() {
     $this -> middleware('auth');
     $user = Auth::user();
-    if (!$user -> is_seller) {
-      return redirect() -> action('StaticController@forbidden');
-    }
+    $this -> check_seller($user);
+
     return view('item.new');
   }
 
@@ -34,7 +33,7 @@ class ItemController extends Controller
     $this -> middleware('auth');
     $user = Auth::user();
 
-    check_seller($user);
+    $this -> check_seller($user);
     $item = new Item;
 
     $path = '';
@@ -106,6 +105,8 @@ class ItemController extends Controller
     }
   }
   private function check_admin($user) {
-
+    if (!$user -> is_admin) {
+      return redirect() -> action('StaticController@forbidden');
+    }
   }
 }
