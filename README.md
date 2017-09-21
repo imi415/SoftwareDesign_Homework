@@ -8,7 +8,7 @@ A e-Commerce system.
 ## Sub Tasks
 
 * [ ]Store item management
-  - [ ]Item CURD
+  - [x]Item CURD
     - Database Schema
       - id(primary key)
       - name(string)
@@ -17,7 +17,8 @@ A e-Commerce system.
       - is_available(bool)
       - available_amount(integer)
       - seller(integer, uid)
-      - price(integer)
+      - price(decimal)
+      - default_shipping_fee(decimal)
       - sold_amount(integer)
 * [ ]User management
   - [ ]User CURD
@@ -26,6 +27,18 @@ A e-Commerce system.
   - [ ]Cart
 * [ ]Online order system
   - [ ]Order CURD
+    - Database Schema (Order)
+      - id(primary key)
+      - buyer_id(integer)
+      - seller_id(integer)
+      - shipping_fee(decimal)
+      - tracking_id(integer)
+      - status(string)
+    - Database Schema (OrderItem)
+      - id(primary key)
+      - order_id(integer)
+      - item_id(integer)
+      - real_price(decimal)
 * [ ]Order status review
   - [ ]Refund, snapshot
 * [ ]Real-time chat(optional)

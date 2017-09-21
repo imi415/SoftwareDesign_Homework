@@ -42,20 +42,19 @@ class ItemController extends Controller
 
   // Show Item
   public function show($id) {
-    $item = Item::where('id', intval($id)) -> get();
-    return view('item.show', ['item' => $item[0]]);
+    $item = Item::where('id', intval($id)) -> first();
+    return view('item.show', ['item' => $item]);
   }
 
   // Update Item page
   public function edit($id) {
-    $item = Item::where('id', intval($id)) -> get();
-    return view('item.edit', ['item' => $item[0]]);
+    $item = Item::where('id', intval($id)) -> first();
+    return view('item.edit', ['item' => $item]);
   }
 
   // Update operation
   public function update(Request $request, $id) {
-    $itemArr = Item::where('id', intval($id)) -> get();
-    $item = $itemArr[0];
+    $item = Item::where('id', intval($id)) -> first();
     $path = $item -> image_url;
     if ($request -> hasFile('image') && $request -> file('image') -> isValid()) {
       $path = $request -> image -> store('images');
@@ -73,14 +72,14 @@ class ItemController extends Controller
 
   // Delete item page.
   public function delete($id) {
-    $item = Item::where('id', intval($id)) -> get();
-    return view('item.delete', ['item' => $item[0]]);
+    $item = Item::where('id', intval($id)) -> first();
+    return view('item.delete', ['item' => $item]);
   }
 
   // Delete operation
   public function destroy($id) {
-    $item = Item::where('id', intval($id)) -> get();
-    $item[0] ->delete();
-    return view('item.destroy', ['item' => $item[0]]);
+    $item = Item::where('id', intval($id)) -> first();
+    $item ->delete();
+    return view('item.destroy', ['item' => $item]);
   }
 }

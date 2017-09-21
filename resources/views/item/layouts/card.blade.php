@@ -8,7 +8,7 @@
         <div class="caption">
           <h3>{{ $item -> name }}</h3>
           <p>${{ $item -> price }}</p>
-          <p><a href="#" class="btn btn-primary" role="button">Purchase now</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
+          <p><a href="{{ action('OrderController@new', ['id' => $item -> id]) }}" class="btn btn-primary" role="button">Purchase now</a> <a href="#" class="btn btn-default" role="button">Add to cart</a></p>
         </div>
       </div>
     </div>

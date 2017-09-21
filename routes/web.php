@@ -23,6 +23,12 @@ Route::get('/item/{id}/delete', 'ItemController@delete');
 Route::delete('/item/{id}/delete', 'ItemController@destroy');
 Route::get('/item/{id}', 'ItemController@show');
 
+Route::get('/item/{id}/order', 'OrderController@new');
+Route::post('/item/{id}/order', 'OrderController@create');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/order', 'OrderController@index');
+Route::get('/order/{id}', 'OrderController@show');
