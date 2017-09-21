@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('body')
+  @component('layouts.navbar', ['user' => $user])
+    @slot('brand')
+      Index of Show
+    @endslot
+  @endcomponent
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-default">
       <div class="panel-heading">Home</div>

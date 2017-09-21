@@ -13,15 +13,20 @@ class OrderController extends Controller
 {
 
   public function __construct() {
-    $this->middleware('auth');
+    $this -> middleware('auth');
   }
 
   public function index() {
     $user = Auth::user();
     $buyer_orders = Order::where('buyer_id', $user -> id) -> get();
+    $buyer_order_items = [];
+    foreach ($buyer_orders as $buyer_order) {
+      $order_items = OrderItem::where('order_id', $buyer_order -> id) -> get();
+      $buyer_order_items.push($order_items);
+    }
     $seller_orders =array();
     if ($user -> is_seller) {
-      $seller_orders = Order::where('seller_id') -> get();
+      $seller_orders = Order::where('seller_id', $user -> id) -> get();
     }
     return view('order.index', ['user' => $user,
                                 'buyer_orders' => $buyer_orders,
@@ -48,16 +53,21 @@ class OrderController extends Controller
     $order -> save();
     $order_item = new OrderItem;
     $order_item -> order_id = $order -> id;
+    $order_item -> name = $item -> name;
     $order_item -> item_id = $item -> id;
     $order_item -> real_price = $item -> price;
 
     $order_item -> save();
-    return '1';
+    return redirect() -> action('PaymentController@show', ['id' => $id]);
   }
 
   public function show($id) {
     $user = Auth::user();
     $order = Order::where('id', $id) -> first();
+    if ($user -> id != $order -> buyer_id && $user -> id != $order -> seller_id) {
+      return redirect() -> action('StaticController@lost');
+    }
+
     $order_items = OrderItem::where('order_id', $id) -> get();
     return view('order.show', ['user' => $user,
                                'order' => $order,

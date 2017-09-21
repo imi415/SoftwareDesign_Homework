@@ -13,6 +13,9 @@
 
 Route::get('/', 'StaticController@index');
 Route::get('/about', 'StaticController@about');
+Route::get('/forbidden', 'StaticController@forbidden');
+Route::get('/lost', 'StaticController@lost');
+
 
 Route::get('/item', 'ItemController@index');
 Route::get('/item/new', 'ItemController@new'); // It MUST above the '/item/{id}'
@@ -26,9 +29,13 @@ Route::get('/item/{id}', 'ItemController@show');
 Route::get('/item/{id}/order', 'OrderController@new');
 Route::post('/item/{id}/order', 'OrderController@create');
 
+Route::get('/logout', 'UserController@logout');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'UserController@home')->name('home');
 
 Route::get('/order', 'OrderController@index');
 Route::get('/order/{id}', 'OrderController@show');
+
+Route::get('/order/{id}/pay', 'PaymentController@show');
+Route::post('/order/{id}/pay', 'PaymentController@pay');

@@ -3,7 +3,7 @@
 @section('title', 'Item Index')
 
 @section('body')
-  @component('layouts.navbar')
+  @component('layouts.navbar', ['user' => $user])
     @slot('brand')
       Index of Show
     @endslot
